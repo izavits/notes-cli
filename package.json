@@ -2,7 +2,9 @@
   "name": "notes-cli",
   "version": "1.0.0",
   "description": "A CLI tool to store notes",
-  "main": "index.js",
+  "main": "note.js",
+  "preferGlobal": true,
+  "bin": "./note.js", 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
