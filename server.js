@@ -12,7 +12,7 @@ function toLower(v) {
 
 // Define schema
 const notesSchema = mongoose.Schema({
-  tile: { type: String, set: toLower },
+  title: { type: String, set: toLower },
   description: { type: String, set: toLower },
   tags: { type: String, set: toLower }
 });
