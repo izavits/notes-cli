@@ -1,17 +1,37 @@
 const program=require('commander');
-const { addNote, getNote } = require('./server');
+const { prompt }=require('inquirer');
+const { addNote, getNote }=require('./server');
+
+// Interactive questions
+const questions = [
+  {
+    type : 'input',
+    name : 'title',
+    message : 'Enter note title  ...'
+  },
+  {
+    type : 'input',
+    name : 'description',
+    message : 'Enter note description ...'
+  },
+  {
+    type : 'input',
+    name : 'tags',
+    message : 'Enter note tags ...'
+  }
+];
 
 program
     .version('1.0.0')
     .description('Notes management tool');
 
 program
-  .command('addNote <title> <description> <tags>')
-  .alias('a')
-  .description('Add a note')
-  .action((title, description, tags) => {
-    addNote({title, description, tags});
-  });
+    .command('addNote')
+    .alias('a')
+    .description('Add a note')
+    .action(() => {
+        prompt(questions).then(answers => addNote(answers));
+    });
 
 program
   .command('getNote <string>')
