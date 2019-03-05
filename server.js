@@ -2,7 +2,8 @@ const mongoose=require('mongoose');
 const assert=require('assert');
 mongoose.Promise=global.Promise;
 
-const db = mongoose.connect('mongodb://localhost:27017/notes-cli');
+mongoose.connect('mongodb://localhost:27017/notes-cli', {'useNewUrlParser': true});
+const db=mongoose.connection;
 
 // Converts value to lowercase
 function toLower(v) {
@@ -27,7 +28,7 @@ const addNote = (note) => {
   Note.create(note, (err) => {
     assert.equal(null, err);
     console.info('New note added');
-    db.disconnect();
+    db.close();
   });
 };
 
@@ -43,7 +44,7 @@ const getNote = (value) => {
     assert.equal(null, err);
     console.info(note);
     console.info(`${note.length} matches`);
-    db.disconnect();
+    db.close();
   });
 };
 
