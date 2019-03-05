@@ -1,0 +1,11 @@
+{
+  "name": "notes-cli",
+  "version": "1.0.0",
+  "description": "A CLI tool to store notes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "izavits",
+  "license": "Apache-2.0"
+}
