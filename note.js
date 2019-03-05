@@ -2,7 +2,13 @@
 
 const program=require('commander');
 const { prompt }=require('inquirer');
-const { addNote, getNote }=require('./server');
+const {
+    addNote,
+    getNote,
+    updateNote,
+    deleteNote,
+    getNoteList
+}=require('./server');
 
 // Interactive questions
 const questions = [
@@ -39,7 +45,32 @@ program
   .command('getNote <string>')
   .alias('r')
   .description('Get note')
-  .action(string => getNote(string));
+    .action(string => getNote(string));
 
+program
+  .command('updateNote <_id>')
+  .alias('u')
+  .description('Update note')
+  .action(_id => {
+    prompt(questions).then((answers) =>
+      updateNote(_id, answers));
+  });
+
+program
+  .command('deleteNote <_id>')
+  .alias('d')
+  .description('Delete note')
+    .action(_id => deleteNote(_id));
+
+program
+  .command('getNoteList')
+  .alias('l')
+  .description('List notes')
+  .action(() => getNoteList());
+
+if (!process.argv.slice(2).length || !/[arudl]/.test(process.argv.slice(2))) {
+  program.outputHelp();
+  process.exit();
+}
 program.parse(process.argv);
 

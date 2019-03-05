@@ -48,7 +48,50 @@ const getNote = (value) => {
   });
 };
 
+/**
+ * @function  [updateNote]
+ * @returns {Sting} status
+ */
+const updateNote = (_id, note) => {
+  Note.update({ _id }, note)
+  .exec((err, status) => {
+    assert.equal(null, err);
+    console.info('Updated successfully');
+    db.close();
+  });
+};
+
+/**
+ * @function  [deleteNote]
+ * @returns {String} status
+ */
+const deleteNote = (_id) => {
+  Note.remove({ _id })
+  .exec((err, status) => {
+    assert.equal(null, err);
+    console.info('Deleted successfully');
+    db.close();
+  });
+};
+
+/**
+ * @function  [getNoteList]
+ * @returns [notelist] notes
+ */
+const getNoteList = () => {
+  Note.find()
+  .exec((err, notes) => {
+    assert.equal(null, err);
+    console.info(notes);
+    console.info(`${notes.length} matches`);
+    db.close();
+  });
+};
+
 module.exports = {
     addNote,
-    getNote
+    getNote,
+    updateNote,
+    deleteNote,
+    getNoteList
 };
